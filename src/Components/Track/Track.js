@@ -2,9 +2,19 @@ import React from 'react';
 import './Track.css';
 
 class Track extends React.Component {
-/*     renderAction() {
-        return isRemoval ? '-' : '+';
-    } */
+    constructor(props) {
+        super(props);
+
+        this.addTrack = this.addTrack.bind(this);
+    }
+
+    renderAction() {
+        return this.props.isRemoval ? '-' : '+';
+    }
+
+    addTrack() {
+        this.props.onAdd(this.props.track);
+    }
 
     render() {
         const { track } = this.props;
@@ -15,7 +25,7 @@ class Track extends React.Component {
                 <h3>{track.name}</h3>
                 <p>{track.artist} | {track.album}</p>
             </div>
-            <button className="Track-action">{/* this.renderAction() */}</button>
+            <button className="Track-action" onClick={this.addTrack}>{this.renderAction()}</button>
             </div>            
         );
     }
