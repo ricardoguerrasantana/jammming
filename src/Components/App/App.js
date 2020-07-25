@@ -1,6 +1,7 @@
 import React from 'react';
 import './App.css';
 import SearchResults from '../SearchResults/SearchResults';
+import Playlist from '../Playlist/Playlist';
 
 const searchResult1 = {
   name: 'Agua' ,
@@ -14,12 +15,20 @@ const searchResult2 = {
   artist: 'Harry Nach' ,
   album: 'Single' ,
   id: '1'
-}
+};
 
 const searchResults = [
   searchResult1 ,
   searchResult2
-]
+];
+
+const playlist = {
+  playlistName: 'My Top 50' ,
+  playlistTracks: [
+    searchResult1 ,
+    searchResult2
+  ]
+};
 
 class App extends React.Component {
   constructor(props) {
@@ -36,7 +45,7 @@ class App extends React.Component {
           {/* <!-- Add a SearchBar component --> */}
           <div className="App-playlist">
             <SearchResults searchResults={this.state.searchResults}></SearchResults>
-            {/* <!-- Add a Playlist component --> */}
+            <Playlist playlist={playlist}></Playlist>
           </div>
         </div>
       </div>
