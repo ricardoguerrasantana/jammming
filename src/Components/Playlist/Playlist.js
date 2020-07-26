@@ -19,12 +19,15 @@ class Playlist extends React.Component {
                 <input 
                     defaultValue={"New Playlist"} 
                     onChange={this.handleNameChange} />
-                <h1>{this.props.playlistName}</h1>
+                {/* <h1>{this.props.playlistName}</h1> */}
                 <TrackList 
                     tracks={this.props.playlistTracks} 
                     isRemoval={true} 
                     onRemove={this.props.onRemove}></TrackList>
-                <button className="Playlist-save">SAVE TO SPOTIFY</button>
+                <button className="Playlist-save"
+                        onClick={this.props.onSave}>
+                    SAVE TO SPOTIFY
+                </button>
             </div>            
         );
     }
