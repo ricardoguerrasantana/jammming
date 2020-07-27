@@ -3,6 +3,7 @@ import './App.css';
 import SearchResults from '../SearchResults/SearchResults';
 import Playlist from '../Playlist/Playlist';
 import SearchBar from '../SearchBar/SearchBar';
+import Spotify from '../../util/Spotify';
 
 const searchResult1 = {
   name: 'Agua' ,
@@ -28,7 +29,7 @@ class App extends React.Component {
     super(props);
 
     this.state = { 
-      searchResults: searchResults ,
+      searchResults: [] ,
       playlistName: 'Top 50' , 
       playlistTracks: []
     };
@@ -37,6 +38,7 @@ class App extends React.Component {
     this.removeTrack = this.removeTrack.bind(this);
     this.updatePlaylistName = this.updatePlaylistName.bind(this);
     this.savePlaylist = this.savePlaylist.bind(this);
+    this.search = this.search.bind(this);
   }
 
   addTrack(track) {
@@ -82,6 +84,10 @@ class App extends React.Component {
 
   search(term) {
     console.log(term);
+
+    this.setState({
+      SearchResults: Spotify.search(term)
+    });
   }
 
   render() {
