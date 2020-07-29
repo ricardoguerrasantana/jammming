@@ -1,11 +1,13 @@
 import React from 'react';
 import './App.css';
+
 import SearchResults from '../SearchResults/SearchResults';
 import Playlist from '../Playlist/Playlist';
 import SearchBar from '../SearchBar/SearchBar';
+
 import Spotify from '../../util/Spotify';
 
-const searchResult1 = {
+/* const searchResult1 = {
   name: 'Agua' ,
   artist: 'J. Balvin & Tiny' ,
   album: 'Bob Sponge movie' ,
@@ -22,7 +24,7 @@ const searchResult2 = {
 const searchResults = [
   searchResult1 ,
   searchResult2
-];
+]; */
 
 class App extends React.Component {
   constructor(props) {
@@ -77,17 +79,25 @@ class App extends React.Component {
   }
 
   savePlaylist() {
-    let trackURIs = [];
+    let trackURIs = this.state.playlistTracks.map(track => track.uri);
+    let playlistName = this.state.playlistName;
 
-    trackURIs = this.state.playlistTracks.map(track => track);
+    Spotify.savePlaylist(playlistName, trackURIs).then(() => {
+      this.setState({
+        playlistName: 'New Playlist' ,
+        playlistTracks: []
+      });
+    });
+
   }
 
   search(term) {
-    console.log(term);
-
-    this.setState({
-      SearchResults: Spotify.search(term)
-    });
+    // console.log(term);
+    Spotify.search(term).then(searchResults => {
+      this.setState({
+        searchResults: searchResults
+      })
+    })
   }
 
   render() {
